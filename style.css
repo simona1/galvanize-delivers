@@ -1,0 +1,15 @@
+#invite {
+  background: url(img/hero.jpg) repeat;
+  background-size: cover;
+  border: 2px solid #0d47a1;
+  height: 450px;
+}
+
+#message {
+  padding-top: 120px;
+  padding-bottom: 20px;
+}
+
+h1 {
+  color: white;
+}
