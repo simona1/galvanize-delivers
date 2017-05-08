@@ -5,13 +5,17 @@ const FOOD_CHOICES = [
   {name: 'Ice Cream Biscuit', price: 7.99, imageUrl: 'img/ice_cream.jpg'},
 ];
 
-function makeItemOrderButton() {
+function makeItemOrderButton(name, price) {
   return $('<div>')
     .addClass('card-action')
     .append(
       $('<a>')
         .attr('href', '#')
         .text('Add to order')
+        .click(event => {
+          event.preventDefault();
+          addItemToCart(name, price);
+        })
     );
 }
 
@@ -23,7 +27,7 @@ function makeItemDescription(name, price) {
         .addClass('card-title')
         .text(name)
     )
-    .append('$' + price);
+    .append(numberToDollarString(price));
 }
 
 function makeItemImage(imageUrl) {
@@ -40,8 +44,30 @@ function makeItemCard(item) {
         .addClass('card small')
         .append(makeItemImage(item.imageUrl))
         .append(makeItemDescription(item.name, item.price))
-        .append(makeItemOrderButton())
+        .append(makeItemOrderButton(item.name, item.price))
     );
+}
+
+function dollarsStringToNumber(priceString) {
+  return parseFloat(priceString.substring(1));
+}
+
+function numberToDollarString(number) {
+  return '$' + number.toFixed(2);
+}
+
+function addItemToCart(name, price) {
+  $('#items').append(
+    $('<tr>')
+      .append($('<td>').text(name))
+      .append($('<td>').text(numberToDollarString(price)))
+  );
+
+  const subtotal = price + dollarsStringToNumber($('#subtotal').text());
+
+  $('#subtotal').text(numberToDollarString(subtotal));
+  $('#tax').text(numberToDollarString(0.1 * subtotal));
+  $('#total').text(numberToDollarString(1.1 * subtotal));
 }
 
 function init() {
@@ -53,6 +79,24 @@ function init() {
     rows[rows.length - 1].append(item);
   });
   $('#menu').append(rows);
+
+  $('#order_button').click(event => {
+    event.preventDefault();
+
+    let message;
+    if (dollarsStringToNumber($('#total').text()) === 0) {
+      message = 'there is no toast :(';
+    } else if ($('#customer').val() === '') {
+      message = 'are you Bill Gates?';
+    } else if ($('#telephone').val() === '') {
+      message = 'no phone provided';
+    } else if ($('#address').val() === '') {
+      message = 'no address provided';
+    } else {
+      message = 'enjoy your arugula pie, should gotten some cannolis though';
+    }
+    Materialize.toast(message, 4000);
+  });
 }
 
 window.onload = init;

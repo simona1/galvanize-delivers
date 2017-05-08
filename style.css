@@ -14,6 +14,10 @@
   padding: 12px;
 }
 
+tr > td:last-child, tr > th:last-child, #totals td {
+  text-align: right;
+}
+
 h1 {
   color: white;
 }

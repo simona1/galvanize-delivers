@@ -5,14 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Galvanize delivers</title>
 
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-  <script src="js/app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
@@ -21,6 +16,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./style.css" rel="stylesheet">
 
+  <script src="js/app.js"></script>
   </head>
 
   <body>
@@ -38,8 +34,53 @@
           <div class="col s12 l6" id="menu">
             <span class="flow-text"><strong>Menu</strong></span>
           </div>
-          <div class="col s12 l4 offset-l2">
+          <div class="col s12 l5 offset-l1">
             <span class="flow-text"><strong>Order</strong></span>
+            <table class="striped">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody id="items">
+              </tbody>
+            </table>
+
+            <table id="totals" class="col l8 offset-l4">
+              <tbody>
+                <tr>
+                  <td>Subtotal</td>
+                  <td id="subtotal">$0.00</td>
+                </tr>
+                <tr>
+                  <td>Tax</td>
+                  <td id="tax">$0.00</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td id="total">$0.00</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <form>
+              <div class="input-field col l12">
+                <i class="pink-text text-accent-3 material-icons prefix">account_circle</i>
+                <input id="customer" type="text" class="validate">
+                <label for="customer">Name</label>
+              </div>
+              <div class="input-field col l12">
+                <i class="pink-text text-accent-3 material-icons prefix">phone</i>
+                <input id="telephone" type="tel" pattern="^\d{3}-\d{3}-\d{4}$" class="validate">
+                <label for="telephone">Phone number</label>
+              </div>
+              <div class="input-field col l12">
+                <i class="pink-text text-accent-3 material-icons prefix">business</i>
+                <input id="address" type="text" class="validate">
+                <label for="address">Address</label>
+              </div>
+            </form>
           </div>
         </div>
 
